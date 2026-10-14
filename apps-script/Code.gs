@@ -153,7 +153,7 @@ function check(v) {
 
 /**
  * The team email. The subject and the "Key: value" lines are a fixed format
- * that the CRM reads; see CRM-HANDOFF-PROMPT.md before changing either.
+ * that the CRM reads; its parser is src/lib/mail/website-form.ts in the CRM, so change both together.
  */
 function teamEmail(v, ref, received) {
   var name = v.first_name + " " + v.last_name;
