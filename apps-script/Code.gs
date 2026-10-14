@@ -19,6 +19,10 @@ var DEFAULTS = {
   OFFICE_PHONE: "087 361 1407",
   SENDER_NAME: "Cllr Noel Connolly",
   SHEET_ID: "",                         // filled in automatically by setup()
+  PRIVACY_URL: "https://noelconnolly.ie/privacy.html",
+  RETENTION_DAYS: "30",                 // Sheet rows and sent copies older than this are deleted daily
+  PURGE_INBOX_COPIES: "false",          // "true" also trashes form emails in this account's inbox after RETENTION_DAYS
+                                        // (only when TEAM_EMAIL is this account and the CRM has imported them)
 };
 
 var CATEGORIES = [
@@ -204,7 +208,9 @@ function confirmationEmail(v, ref) {
     "",
     "Kind regards,",
     "The office of Cllr Noel Connolly",
-    "6 Claregate St, Kildare Town, Co. Kildare R51 Y243",
+    "4 Market Square, Kildare, R51 X458",
+    "",
+    "How we use your information: " + setting("PRIVACY_URL"),
   ];
   var ga = [
     "A chara,",
@@ -220,7 +226,9 @@ function confirmationEmail(v, ref) {
     "",
     "Le meas,",
     "Oifig an Chomhairleora Noel Connolly",
-    "6 Sráid Claregate, Baile Chill Dara, Co. Chill Dara R51 Y243",
+    "4 Cearnóg an Mhargaidh, Cill Dara, R51 X458",
+    "",
+    "Conas a úsáidimid d'fhaisnéis: " + setting("PRIVACY_URL"),
   ];
   var body = en.join("\n") + "\n\n----------------------------------------\n\n" + ga.join("\n");
 
@@ -259,6 +267,42 @@ function sheet() {
   return sh;
 }
 
+// ----- Retention ---------------------------------------------------------------------
+
+/**
+ * Runs daily (installed by setup). The Sheet and these emails are only copies
+ * made while delivering a message; the casework system keeps the real record.
+ * Deletes Sheet rows, and moves this account's sent copies to the Bin (Gmail
+ * empties it after 30 days), once they are older than RETENTION_DAYS.
+ */
+function retentionCleanup() {
+  var days = Number(setting("RETENTION_DAYS")) || 30;
+  var cutoff = new Date(Date.now() - days * 24 * 3600 * 1000);
+
+  var sh = sheet();
+  var last = sh.getLastRow();
+  if (last > 1) {
+    var received = sh.getRange(2, 1, last - 1, 1).getValues();
+    // Rows are in date order, so delete from the bottom of the old block upwards.
+    for (var r = received.length - 1; r >= 0; r--) {
+      var d = received[r][0];
+      if (d instanceof Date && d < cutoff) sh.deleteRow(r + 2);
+    }
+  }
+
+  var queries = ['in:sent subject:("[Website]" OR "Fuarthas do theachtaireacht") older_than:' + days + "d"];
+  if (setting("PURGE_INBOX_COPIES") === "true") {
+    queries.push('in:inbox from:me subject:"[Website]" older_than:' + days + "d");
+  }
+  queries.forEach(function (q) {
+    var threads;
+    do {
+      threads = GmailApp.search(q, 0, 100);
+      if (threads.length) GmailApp.moveThreadsToTrash(threads);
+    } while (threads.length === 100);
+  });
+}
+
 // ----- Helpers -----------------------------------------------------------------------
 
 function makeRef() {
@@ -284,10 +328,15 @@ function json(obj) {
 
 // ----- Run these by hand from the editor ----------------------------------------------
 
-/** Run once after pasting the script in: creates the Sheet and asks for permissions. */
+/** Run once after pasting the script in: creates the Sheet, installs the daily clean-up and asks for permissions. */
 function setup() {
   var sh = sheet();
   Logger.log("Sheet ready: " + sh.getParent().getUrl());
+  ScriptApp.getProjectTriggers().forEach(function (t) {
+    if (t.getHandlerFunction() === "retentionCleanup") ScriptApp.deleteTrigger(t);
+  });
+  ScriptApp.newTrigger("retentionCleanup").timeBased().everyDays(1).atHour(3).create();
+  Logger.log("Daily clean-up installed: copies older than " + setting("RETENTION_DAYS") + " days are deleted.");
   Logger.log("Emails left today: " + MailApp.getRemainingDailyQuota());
 }
 

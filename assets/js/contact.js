@@ -8,23 +8,23 @@
   // ----- Topics -----------------------------------------------------------
   // `keywords` power the search. Add words people actually use.
   var CATEGORIES = [
-    { id: "housing", name: "Housing Query", icon: "house", keywords: ["housing", "house", "home", "council house", "social housing", "housing list", "waiting list", "hap", "rent", "rental", "tenancy", "landlord", "eviction", "homeless", "homelessness", "rent supplement", "rent arrears", "mortgage", "repairs", "council repairs", "transfer", "rta", "rtb", "mould", "damp", "apartment", "accommodation"] },
-    { id: "planning", name: "Planning Query", icon: "ruler", keywords: ["planning", "planning permission", "planning application", "objection", "observation", "extension", "development", "zoning", "building", "enforcement", "unauthorised", "retention", "an bord pleanala", "permission"] },
-    { id: "roads", name: "Road Repair Query", icon: "construction", keywords: ["road", "roads", "pothole", "potholes", "footpath", "path", "pavement", "resurfacing", "road repair", "traffic", "speed", "speeding", "ramps", "signage", "street", "drain", "gully", "flooding", "verge", "hedge cutting", "yellow box", "parking", "speed bumps"] },
-    { id: "peace", name: "Peace Commissioner Query", icon: "pen-line", keywords: ["peace commissioner", "sign", "signature", "signing", "witness", "certify", "certified copy", "documents signed", "statutory declaration", "form signed", "passport form", "susi form", "commissioner", "stamp"] },
-    { id: "medical-card", name: "Medical Card Query", icon: "credit-card", keywords: ["medical card", "gp visit card", "gp card", "medical card renewal", "medical card application", "drugs payment scheme", "dps", "prescription"] },
-    { id: "health", name: "Health Query", icon: "heart-pulse", keywords: ["health", "hospital", "hse", "waiting list", "appointment", "operation", "surgery", "consultant", "mental health", "camhs", "doctor", "gp", "nursing home", "fair deal", "dental", "orthodontic", "ambulance", "therapy", "physio"] },
-    { id: "business", name: "Business Query", icon: "briefcase", keywords: ["business", "local enterprise office", "leo", "rates", "commercial rates", "shop", "start up", "startup", "enterprise", "trading", "licence", "license", "employer", "jobs", "employment", "small business", "grant for business"] },
-    { id: "community", name: "Community Support Query", icon: "users", keywords: ["community", "residents association", "club", "sports club", "tidy towns", "volunteer", "community group", "event", "festival", "anti social", "antisocial", "estate", "green area", "playground", "litter", "dumping", "graffiti", "garda", "safety", "community centre", "noise", "neighbour", "neighbours", "dog", "dogs", "barking", "fouling"] },
-    { id: "education", name: "Education Query", icon: "graduation-cap", keywords: ["education", "school", "school place", "school transport", "bus", "susi", "college", "university", "grant", "special needs", "sna", "teacher", "secondary", "primary", "leaving cert", "back to school", "uniform"] },
-    { id: "childcare", name: "Childcare Query", icon: "baby", keywords: ["childcare", "creche", "crèche", "preschool", "pre school", "ecce", "ncs", "national childcare scheme", "childminder", "after school", "montessori", "early years"] },
-    { id: "home-help", name: "Home Help/Carers Query", icon: "hand-heart", keywords: ["home help", "carer", "carers", "carers allowance", "carer's allowance", "carers support grant", "care", "home support", "home care", "care package", "respite", "elderly", "older person", "caring"] },
-    { id: "infrastructure", name: "Infrastructure Query", icon: "lamp", keywords: ["infrastructure", "streetlight", "street light", "public lighting", "water", "irish water", "uisce eireann", "sewer", "sewage", "broadband", "electricity", "esb", "bus stop", "public transport", "train", "cycle lane", "greenway", "bridge", "drainage", "wastewater", "light", "lights", "lamp", "lamp post"] },
-    { id: "disability", name: "Disability Query", icon: "accessibility", keywords: ["disability", "disabled", "disability allowance", "wheelchair", "accessible", "accessibility", "housing adaptation grant", "adaptation", "mobility", "disabled parking", "autism", "assessment of need", "aon", "invalidity"] },
-    { id: "grants", name: "Council Grants Query", icon: "badge-euro", keywords: ["grant", "grants", "council grant", "community grant", "housing aid for older people", "mobility aids grant", "adaptation grant", "funding", "seai", "retrofit grant", "sports capital", "amenity grant", "heritage grant", "arts grant", "club", "club funding"] },
-    { id: "irish", name: "Irish Language Query", icon: "languages", keywords: ["irish", "irish language", "gaeilge", "as gaeilge", "gaeltacht", "gaelscoil", "bilingual", "teanga", "language"] },
-    { id: "campaign", name: "Campaign Query", icon: "megaphone", keywords: ["campaign", "election", "canvass", "canvassing", "volunteer", "poster", "leaflet", "vote", "votes", "register to vote", "join", "membership", "support noel", "donate", "party"] },
-    { id: "other", name: "Other Query", icon: "message-circle-question", keywords: ["other", "something else", "general", "question", "not sure", "query", "help", "complaint", "feedback", "invitation", "invite", "meeting"] },
+    { id: "housing", name: "Housing Query", keywords: ["housing", "house", "home", "council house", "social housing", "housing list", "waiting list", "hap", "rent", "rental", "tenancy", "landlord", "eviction", "homeless", "homelessness", "rent supplement", "rent arrears", "mortgage", "repairs", "council repairs", "transfer", "rta", "rtb", "mould", "damp", "apartment", "accommodation"] },
+    { id: "planning", name: "Planning Query", keywords: ["planning", "planning permission", "planning application", "objection", "observation", "extension", "development", "zoning", "building", "enforcement", "unauthorised", "retention", "an bord pleanala", "permission"] },
+    { id: "roads", name: "Road Repair Query", keywords: ["road", "roads", "pothole", "potholes", "footpath", "path", "pavement", "resurfacing", "road repair", "traffic", "speed", "speeding", "ramps", "signage", "street", "drain", "gully", "flooding", "verge", "hedge cutting", "yellow box", "parking", "speed bumps"] },
+    { id: "peace", name: "Peace Commissioner Query", keywords: ["peace commissioner", "sign", "signature", "signing", "witness", "certify", "certified copy", "documents signed", "statutory declaration", "form signed", "passport form", "susi form", "commissioner", "stamp"] },
+    { id: "medical-card", name: "Medical Card Query", keywords: ["medical card", "gp visit card", "gp card", "medical card renewal", "medical card application", "drugs payment scheme", "dps", "prescription"] },
+    { id: "health", name: "Health Query", keywords: ["health", "hospital", "hse", "waiting list", "appointment", "operation", "surgery", "consultant", "mental health", "camhs", "doctor", "gp", "nursing home", "fair deal", "dental", "orthodontic", "ambulance", "therapy", "physio"] },
+    { id: "business", name: "Business Query", keywords: ["business", "local enterprise office", "leo", "rates", "commercial rates", "shop", "start up", "startup", "enterprise", "trading", "licence", "license", "employer", "jobs", "employment", "small business", "grant for business"] },
+    { id: "community", name: "Community Support Query", keywords: ["community", "residents association", "club", "sports club", "tidy towns", "volunteer", "community group", "event", "festival", "anti social", "antisocial", "estate", "green area", "playground", "litter", "dumping", "graffiti", "garda", "safety", "community centre", "noise", "neighbour", "neighbours", "dog", "dogs", "barking", "fouling"] },
+    { id: "education", name: "Education Query", keywords: ["education", "school", "school place", "school transport", "bus", "susi", "college", "university", "grant", "special needs", "sna", "teacher", "secondary", "primary", "leaving cert", "back to school", "uniform"] },
+    { id: "childcare", name: "Childcare Query", keywords: ["childcare", "creche", "crèche", "preschool", "pre school", "ecce", "ncs", "national childcare scheme", "childminder", "after school", "montessori", "early years"] },
+    { id: "home-help", name: "Home Help/Carers Query", keywords: ["home help", "carer", "carers", "carers allowance", "carer's allowance", "carers support grant", "care", "home support", "home care", "care package", "respite", "elderly", "older person", "caring"] },
+    { id: "infrastructure", name: "Infrastructure Query", keywords: ["infrastructure", "streetlight", "street light", "public lighting", "water", "irish water", "uisce eireann", "sewer", "sewage", "broadband", "electricity", "esb", "bus stop", "public transport", "train", "cycle lane", "greenway", "bridge", "drainage", "wastewater", "light", "lights", "lamp", "lamp post"] },
+    { id: "disability", name: "Disability Query", keywords: ["disability", "disabled", "disability allowance", "wheelchair", "accessible", "accessibility", "housing adaptation grant", "adaptation", "mobility", "disabled parking", "autism", "assessment of need", "aon", "invalidity"] },
+    { id: "grants", name: "Council Grants Query", keywords: ["grant", "grants", "council grant", "community grant", "housing aid for older people", "mobility aids grant", "adaptation grant", "funding", "seai", "retrofit grant", "sports capital", "amenity grant", "heritage grant", "arts grant", "club", "club funding"] },
+    { id: "irish", name: "Irish Language Query", keywords: ["irish", "irish language", "gaeilge", "as gaeilge", "gaeltacht", "gaelscoil", "bilingual", "teanga", "language"] },
+    { id: "campaign", name: "Campaign Query", keywords: ["campaign", "election", "canvass", "canvassing", "volunteer", "poster", "leaflet", "vote", "votes", "register to vote", "join", "membership", "support noel", "donate", "party"] },
+    { id: "other", name: "Other Query", keywords: ["other", "something else", "general", "question", "not sure", "query", "help", "complaint", "feedback", "invitation", "invite", "meeting"] },
   ];
   var OTHER = CATEGORIES[CATEGORIES.length - 1];
 
@@ -206,7 +206,6 @@
     (children || []).forEach(function (c) { n.appendChild(c); });
     return n;
   }
-  function icons() { if (window.lucide) window.lucide.createIcons(); }
 
   // ----- State -------------------------------------------------------------
   var state = { category: null, step: 1, startedAt: Date.now() };
@@ -222,19 +221,16 @@
 
   // Topic tiles
   CATEGORIES.forEach(function (c) {
-    var b = el("button", { type: "button", class: "cat", "aria-pressed": "false", "data-id": c.id }, [
-      el("span", { class: "icon", html: '<i data-lucide="' + c.icon + '"></i>' }),
-      el("span", { class: "name", text: c.name }),
-    ]);
+    var b = el("button", { type: "button", class: "cat", "aria-pressed": "false", "data-id": c.id, text: c.name });
     b.addEventListener("click", function () { chooseCategory(c, true); });
     grid.appendChild(b);
   });
 
-  // Popular chips
+  // Popular questions
   var popular = $("#popular");
   ["Pothole or damaged road", "Applying for social housing", "Medical card application or renewal", "Getting documents signed or certified", "Streetlight not working"].forEach(function (label) {
     var f = FAQS.filter(function (x) { return x.label === label; })[0];
-    var chip = el("button", { type: "button", class: "chip", text: label });
+    var chip = el("button", { type: "button", text: label });
     chip.addEventListener("click", function () {
       searchInput.value = label;
       chooseCategory(f.cat, true);
@@ -266,9 +262,8 @@
   }
 
   function showNote(html) {
-    note.innerHTML = '<i data-lucide="lightbulb"></i><div>' + html + "</div>";
+    note.innerHTML = html;
     note.hidden = false;
-    icons();
     $all("button[data-pick]", note).forEach(function (b) {
       b.addEventListener("click", function () { chooseCategory(byId(b.getAttribute("data-pick")), true); });
     });
@@ -356,10 +351,6 @@
   function goTo(n) {
     state.step = n;
     $all(".form-step").forEach(function (s) { s.hidden = Number(s.getAttribute("data-step")) !== n; });
-    $all(".steps li").forEach(function (li, i) {
-      li.classList.toggle("active", i + 1 === n);
-      li.classList.toggle("done", i + 1 < n);
-    });
     var shell = $("#form");
     if (shell && shell.getBoundingClientRect().top < 0) shell.scrollIntoView({ behavior: "smooth", block: "start" });
     var focusTarget = $('.form-step[data-step="' + n + '"] h2');
@@ -496,7 +487,8 @@
   }
 
   var endpoint = CONFIG.FORM_ENDPOINT || "";
-  var previewMode = !/^https:\/\/script\.google\.com\//.test(endpoint);
+  // Preview mode until a real https address is configured (Apps Script or the CRM).
+  var previewMode = !/^https:\/\//.test(endpoint);
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -530,8 +522,7 @@
       })
       .catch(function (err) {
         btn.disabled = false;
-        btn.innerHTML = '<i data-lucide="send"></i>Send message';
-        icons();
+        btn.textContent = "Send message";
         errBox.innerHTML = "Sorry, your message couldn't be sent (" + escapeHtml(err.message) + "). Please try again, email <a href=\"mailto:" + CONFIG.FALLBACK_EMAIL + "\">" + CONFIG.FALLBACK_EMAIL + "</a> or phone " + CONFIG.OFFICE_PHONE + ".";
         errBox.hidden = false;
       });
@@ -541,7 +532,6 @@
 
   function done(ref, v, preview) {
     $all(".form-step").forEach(function (s) { s.hidden = true; });
-    $(".steps").hidden = true;
     var box = $("#success");
     box.hidden = false;
     $("#success-ref").textContent = ref;
@@ -555,15 +545,12 @@
       $("#preview-body").textContent = mail.body;
       $("#success-email-line").textContent = "Preview mode: nothing was sent. This is what the team would receive.";
     }
-    icons();
     box.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   // Deep links such as contact.html?topic=housing preselect a topic.
   var params = new URLSearchParams(location.search);
   if (params.get("topic")) chooseCategory(byId(params.get("topic")), false);
-
-  icons();
 
   // Exposed for the self-test page only.
   window.__contactSearch = search;
