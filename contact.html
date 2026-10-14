@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en-IE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact | Cllr Noel Connolly</title>
+  <meta name="description" content="Get in touch with Cllr Noel Connolly by email, phone or drop in. Send a query about housing, planning, roads, medical cards and more.">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/barlow-condensed-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <div class="strip">
+    <div class="wrap">
+      <a href="tel:+353873611407">087 361 1407</a>
+      <a href="mailto:mail@noelconnolly.ie">mail@noelconnolly.ie</a>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html">Cllr Noel Connolly<small>Kildare County Council</small></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="nav" id="site-nav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="activities.html">Recent Activities</a>
+        <a href="social.html">Social</a>
+        <a href="contact.html" aria-current="page">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-head">
+      <div class="wrap">
+        <h1>Get in touch</h1>
+        <p>by email, phone or drop in</p>
+      </div>
+    </section>
+    <section class="section">
+      <div class="wrap">
+        <dl class="contact-list">
+          <div><dt>Email</dt><dd><a href="mailto:mail@noelconnolly.ie">mail@noelconnolly.ie</a></dd></div>
+          <div><dt>Phone</dt><dd><a href="tel:+353873611407">087 361 1407</a></dd></div>
+          <div><dt>Office</dt><dd>4 Market Square, Kildare, R51 X458<small><a href="https://www.google.com/maps/search/?api=1&query=4+Market+Square%2C+Kildare%2C+R51+X458" target="_blank" rel="noopener">Open in Google Maps</a></small></dd></div>
+        </dl>
+
+        <div class="form-box" id="form">
+          <form id="contact-form" novalidate>
+            <input type="hidden" id="category" name="category">
+            <div class="hp" aria-hidden="true">
+              <label for="website">Leave this empty</label>
+              <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="form-step" data-step="1">
+              <p class="step-label">Step 1 of 3</p>
+              <h2>What is your query about?</h2>
+              <p>Type a few words, or choose a topic from the list.</p>
+
+              <div class="search">
+                <label for="topic-search">Search topics</label>
+                <input id="topic-search" class="search-input" type="search" autocomplete="off"
+                       placeholder="For example: pothole, housing list, medical card"
+                       role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="topic-suggestions">
+                <ul id="topic-suggestions" class="suggestions" role="listbox" hidden></ul>
+              </div>
+              <div id="match-note" class="match-note" role="status" hidden></div>
+              <p class="popular" id="popular">Common questions: </p>
+
+              <div class="cat-grid" id="cat-grid" role="group" aria-label="Topics"></div>
+              <p class="err-topic" id="topic-error" role="alert"></p>
+
+              <div class="form-actions">
+                <button type="button" class="btn btn-outline" id="search-go">Find closest topic</button>
+                <button type="button" class="btn" id="to-details">Continue</button>
+              </div>
+            </div>
+
+            <div class="form-step" data-step="2" hidden>
+              <p class="step-label">Step 2 of 3</p>
+              <h2>Your details</h2>
+              <div class="selected-line">
+                <span>Topic: <strong id="selected-name">Other Query</strong></span>
+                <button type="button" id="change-topic">Change topic</button>
+              </div>
+
+              <div class="grid-2">
+                <div class="field">
+                  <label for="first_name">First name</label>
+                  <input id="first_name" name="first_name" autocomplete="given-name" required>
+                  <span class="err"></span>
+                </div>
+                <div class="field">
+                  <label for="last_name">Last name</label>
+                  <input id="last_name" name="last_name" autocomplete="family-name" required>
+                  <span class="err"></span>
+                </div>
+              </div>
+
+              <div class="grid-2">
+                <div class="field">
+                  <label for="area">Area</label>
+                  <input id="area" name="area" list="area-list" autocomplete="address-level2" placeholder="For example: Kildare Town" required>
+                  <datalist id="area-list"></datalist>
+                  <span class="help">Your town, village or estate.</span>
+                  <span class="err"></span>
+                </div>
+                <div class="field">
+                  <label for="nature">Type of request</label>
+                  <select id="nature" name="nature" required>
+                    <option value="">Choose one</option>
+                  </select>
+                  <span class="err"></span>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="description">Your query</label>
+                <textarea id="description" name="description" maxlength="3000" required></textarea>
+                <span class="help">Include any reference numbers, addresses or dates that would help. Only include health or other sensitive details if they're needed to help you.</span>
+                <span class="counter" id="desc-count">0 / 3000</span>
+                <span class="err"></span>
+              </div>
+
+              <div class="grid-2">
+                <div class="field">
+                  <label for="email">Email address <span class="opt">(for your confirmation)</span></label>
+                  <input id="email" name="email" type="email" autocomplete="email" inputmode="email">
+                  <span class="err"></span>
+                </div>
+                <div class="field">
+                  <label for="phone">Preferred phone number</label>
+                  <input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel">
+                  <span class="err"></span>
+                </div>
+              </div>
+
+              <fieldset class="field" data-field="contact_method">
+                <legend>How would you like us to contact you?</legend>
+                <div class="radios">
+                  <label><input type="radio" name="contact_method" value="Email"> Email</label>
+                  <label><input type="radio" name="contact_method" value="Phone call"> Phone call</label>
+                  <label><input type="radio" name="contact_method" value="Text message"> Text message</label>
+                </div>
+                <span class="err"></span>
+              </fieldset>
+
+              <div class="field" data-field="consent">
+                <label class="check">
+                  <input type="checkbox" name="consent" id="consent">
+                  <span>I have read the <a href="privacy.html" target="_blank">privacy notice</a>. I understand Noel's office will use these details to deal with my query, and may pass them to the public body responsible if needed.</span>
+                </label>
+                <span class="err"></span>
+              </div>
+
+              <div class="form-actions">
+                <button type="button" class="btn btn-outline" onclick="document.getElementById('change-topic').click()">Back</button>
+                <button type="button" class="btn" id="to-review">Review</button>
+              </div>
+            </div>
+
+            <div class="form-step" data-step="3" hidden>
+              <p class="step-label">Step 3 of 3</p>
+              <h2>Check and send</h2>
+              <p>Please check your details before sending.</p>
+              <dl class="review" id="review-list"></dl>
+              <div class="form-error" id="send-error" role="alert" hidden></div>
+              <div class="form-actions">
+                <button type="button" class="btn btn-outline" id="back-to-details">Edit</button>
+                <button type="submit" class="btn" id="send">Send message</button>
+              </div>
+            </div>
+          </form>
+
+          <div class="success" id="success" hidden>
+            <h2>Thank you, your message has been sent</h2>
+            <p>Your reference is <span class="ref" id="success-ref"></span></p>
+            <p id="success-email-line"></p>
+            <p>We aim to respond within about 2 working days, although this can vary with the volume of queries. If it's urgent, please phone 087 361 1407.</p>
+            <p><a class="btn btn-outline" href="index.html">Back to home</a></p>
+            <div class="preview-mail" id="preview-mail" hidden>
+              <h3>Email the office would receive</h3>
+              <p><strong>Subject:</strong> <span id="preview-subject"></span></p>
+              <pre id="preview-body"></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-panel">
+      <div class="wrap split">
+        <div class="pc">
+          <img src="assets/img/peace-commissioner.png"
+               onerror="this.onerror=null;this.src='https://noelconnolly.ie/resources/Peace%20Commissioner%20%281%29.png.opt556x765o0%2C0s556x765.png'"
+               alt="Peace Commissioner" width="556" height="765" loading="lazy">
+          <div class="prose">
+            <h2>Peace Commissioner</h2>
+            <p>Noel is a Peace Commissioner and can witness signatures, sign statutory declarations and certify copies of documents. Choose <strong>Peace Commissioner Query</strong> above to arrange it.</p>
+          </div>
+        </div>
+        <aside class="aside-box">
+          <h3>Your information</h3>
+          <p>We use what you send only to deal with your query. This website sets no cookies.</p>
+          <p><a href="privacy.html">Read the privacy notice</a></p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© Copyright Noel Connolly</p>
+      <p>4 Market Square, Kildare, R51 X458, Ireland | <a href="tel:+353873611407">087 361 1407</a></p>
+      <p><a href="privacy.html">Privacy and cookies</a></p>
+    </div>
+  </footer>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/contact.js"></script>
+  <script src="assets/js/site.js"></script>
+</body>
+</html>
