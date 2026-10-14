@@ -514,18 +514,25 @@
     payload.append("elapsed_ms", String(Date.now() - state.startedAt));
     payload.append("page", location.href);
 
+    // The CRM (or the Apps Script fallback) answers {ok, ref} or {ok: false, error}.
+    // Its error text is written for the person, so show it as it is.
     fetch(endpoint, { method: "POST", body: payload })
-      .then(function (res) { return res.json(); })
-      .then(function (data) {
-        if (!data || !data.ok) throw new Error((data && data.error) || "Sending failed");
-        done(data.ref, v, false);
+      .then(function (res) {
+        return res.json().catch(function () { return null; });
       })
-      .catch(function (err) {
-        btn.disabled = false;
-        btn.textContent = "Send message";
-        errBox.innerHTML = "Sorry, your message couldn't be sent (" + escapeHtml(err.message) + "). Please try again, email <a href=\"mailto:" + CONFIG.FALLBACK_EMAIL + "\">" + CONFIG.FALLBACK_EMAIL + "</a> or phone " + CONFIG.OFFICE_PHONE + ".";
-        errBox.hidden = false;
-      });
+      .then(function (data) {
+        if (data && data.ok) { done(data.ref, v, false); return; }
+        failed(data && data.error);
+      })
+      .catch(function () { failed(null); });
+
+    function failed(message) {
+      btn.disabled = false;
+      btn.textContent = "Send message";
+      errBox.innerHTML = escapeHtml(message || "Sorry, your message couldn't be sent. Please check your connection and try again.") +
+        " You can also email <a href=\"mailto:" + CONFIG.FALLBACK_EMAIL + "\">" + CONFIG.FALLBACK_EMAIL + "</a> or phone " + CONFIG.OFFICE_PHONE + ".";
+      errBox.hidden = false;
+    }
   });
 
   function escapeHtml(s) { return String(s).replace(/[&<>"']/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]; }); }
@@ -535,15 +542,14 @@
     var box = $("#success");
     box.hidden = false;
     $("#success-ref").textContent = ref;
-    $("#success-email-line").textContent = v.email
-      ? "We've sent a confirmation to " + v.email + "."
-      : "We'll be in touch by " + v.contact_method.toLowerCase() + ".";
+    var reach = { "Email": "by email at " + v.email, "Phone call": "by phone on " + v.phone, "Text message": "by text on " + v.phone };
+    $("#success-email-line").textContent = "We'll be in touch " + (reach[v.contact_method] || "soon") + ". Please quote your reference if you contact us about it.";
     if (preview) {
       var mail = teamEmail(v, ref);
       $("#preview-mail").hidden = false;
       $("#preview-subject").textContent = mail.subject;
       $("#preview-body").textContent = mail.body;
-      $("#success-email-line").textContent = "Preview mode: nothing was sent. This is what the team would receive.";
+      $("#success-email-line").textContent = "Preview mode: nothing was sent. Below is what the office would receive.";
     }
     box.scrollIntoView({ behavior: "smooth", block: "start" });
   }

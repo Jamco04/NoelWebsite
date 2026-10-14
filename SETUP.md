@@ -2,27 +2,32 @@
 
 The site is plain HTML, CSS and JavaScript with no build step. There are four jobs, done in this order:
 
-1. Switch the contact form on (the CRM's website-form address, or Google Apps Script).
+1. Switch the contact form on (deploy the CRM endpoint and test it).
 2. Put the site on GitHub Pages (about 10 minutes).
 3. Save the photos from the old site (5 minutes, **before** step 4).
 4. Point noelconnolly.ie at the new site (DNS at the .ie registrar, about 15 minutes plus waiting).
 
-Until step 1 is done, the contact form runs in **preview mode**. It can be filled in end to end, nothing is sent, and the last screen shows the email the team would have received.
+If `FORM_ENDPOINT` is ever set to something that isn't an `https://` address, the contact form runs in **preview mode**: it can be filled in end to end, nothing is sent, and the last screen shows what the office would have received.
 
 ---
 
 ## 1. Switch the contact form on
 
-There are two ways, and the form works with either. Only the address in `assets/js/config.js` changes.
+The form already sends to the Constituency CRM (`FORM_ENDPOINT` in `assets/js/config.js` is `https://constituency-crm.vercel.app/api/public/website-form`). The CRM stores each query as a case, in the EU, and sends the person its own bilingual confirmation. The website sends nothing else, so nobody gets two confirmations.
 
-- **Recommended: send the form straight to the CRM.** Once the CRM chat has built the `/api/public/website-form` address from `CRM-HANDOFF-PROMPT.md`, put that address in `FORM_ENDPOINT` and you're done. Each query is then stored once, in the CRM (hosted in Ireland), and the CRM sends the bilingual confirmation. Skip the rest of this step.
-- **Fallback: Google Apps Script**, described below. Use it if the CRM endpoint isn't ready yet. It emails the office and the CRM picks the message up from the inbox.
+To make it work:
 
-**Data protection note.** A personal `@gmail.com` account has no data processing agreement with Google, which the GDPR expects when a service holds other people's personal data for you. If you use the Apps Script route for more than a short while, run it on a Google Workspace account (from about €7 a month), which comes with Google's data processing terms. The script keeps only 30 days of copies either way (see *Retention* below).
+1. **Deploy the CRM change** that adds the endpoint (the CRM chat's push script). `https://constituency-crm.vercel.app/api/health` should then show `pendingMigrations: []`.
+2. **Allowed websites.** The CRM only accepts the form from `https://noelconnolly.ie` and `https://www.noelconnolly.ie`. To test on the GitHub Pages address before the domain moves, add `https://<owner>.github.io` (no path) under CRM **Settings → Email & automation**. Remove it once the domain is live.
+3. **Test it** from the live site with a phone-only message, then with an email address. Check the case appears in the CRM with the right topic, area and contact method, and that the email test gets exactly one confirmation. Delete the test cases afterwards.
 
-### Google Apps Script
+If the CRM's contact form switch is off, the form shows the CRM's "switched off" message along with the office email and phone number.
 
-This runs free on Noel's Google account. A personal Gmail can send about 100 emails a day, and each message uses two: one to the team and one confirmation to the sender. That's roughly 50 messages a day.
+**Is the Google Apps Script still needed?** No. It stays in the repo as a fallback in case the office ever stops using the CRM. If you do use it, run it on a Google Workspace account (a personal `@gmail.com` has no data processing agreement with Google), put its `/exec` URL in `FORM_ENDPOINT` instead, and never publish its Sheet to the web.
+
+### Fallback: Google Apps Script
+
+This runs on a Google account. A personal Gmail can send about 100 emails a day, and each message uses two: one to the team and one confirmation to the sender. That's roughly 50 messages a day.
 
 1. Sign in to Noel's Google account and go to <https://script.google.com>. Click **New project** and name it `noelconnolly.ie contact form`.
 2. Delete what's in `Code.gs`, then paste in the whole of [`apps-script/Code.gs`](apps-script/Code.gs). Save.
@@ -30,7 +35,7 @@ This runs free on Noel's Google account. A personal Gmail can send about 100 ema
 4. Choose `setup` in the function drop-down and click **Run**. Google asks for permission: choose Noel's account, then **Advanced → Go to … (unsafe) → Allow**. The warning appears because the script is new and unreviewed, and it is normal. This step creates the Google Sheet (the log shows its link, and it's also in Noel's Drive) and schedules the daily clean-up described under *Retention*.
 5. Choose `sendTest` and click **Run**. Check the team inbox: you should get the formatted test message and the bilingual confirmation.
 6. Click **Deploy → New deployment**. Pick type **Web app**, set *Execute as* to **Me** and *Who has access* to **Anyone**, then click **Deploy**. Copy the **Web app URL**, which ends in `/exec`.
-7. In the website, open [`assets/js/config.js`](assets/js/config.js) and replace `PASTE_APPS_SCRIPT_WEB_APP_URL_HERE` with that URL. Commit the change.
+7. In the website, open [`assets/js/config.js`](assets/js/config.js) and set `FORM_ENDPOINT` to that URL. Commit the change.
 8. On the live site, send a real test through the contact page.
 
 **If you change `Code.gs` later**, use **Deploy → Manage deployments → Edit (pencil) → Version: New version → Deploy**. That keeps the same URL. A *New deployment* gives a new URL, which would then need to go back into `config.js`.
@@ -131,7 +136,7 @@ This is done at whoever manages the domain's DNS. That's usually the .ie registr
 - **Contact topics and search words:** these are in `CATEGORIES` and `FAQS` at the top of `assets/js/contact.js`. If you rename a category, change the same list in `apps-script/Code.gs` and tell the CRM chat, because the CRM reads category names from the emails.
 - **Colours and fonts** are set once, at the top of `assets/css/style.css`. The fonts (Barlow Condensed and Source Sans 3) are stored in `assets/fonts/`, so the site makes no requests to Google Fonts.
 - **Office address** appears in every page's footer, in `index.html`, `contact.html` and `privacy.html`, and in the confirmation email in `apps-script/Code.gs`.
-- **Privacy notice:** `privacy.html` is a draft. Have it checked before launch, and keep its retention periods the same as the CRM's.
+- **Privacy notice:** `privacy.html` is a draft. Have it checked before launch, and keep its retention periods the same as the CRM's (Settings → Data & privacy there). The campaign deletion date in it (31 December 2029) is the CRM's default.
 
 ## Cookies and privacy
 
