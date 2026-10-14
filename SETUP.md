@@ -99,7 +99,7 @@ Open each link, right-click the image, choose **Save image as…**, then upload 
 
 ## 4. Point noelconnolly.ie at the new site
 
-This is done at whoever manages the domain's DNS. That's usually the .ie registrar (e.g. Blacknight, Register.ie, Hosting Ireland, Letshost). The current site is on Yola, so check whether Yola manages it.
+noelconnolly.ie's DNS is managed by **Web Hosting Ireland** (its nameservers are `ns1`–`ns3.webhostingireland.ie` and `ns4.webhostingireland.eu`). Log in to their client area, open the cPanel for noelconnolly.ie and use **Zone Editor**. As of 14 October 2026 the bare domain points at `91.210.235.40` (the old site, also hosted there), `www` is a CNAME to `noelconnolly.ie`, and email uses `filter1`/`filter2.webhostingireland.ie`.
 
 **Important: don't touch the `MX` records.** They deliver email for `mail@noelconnolly.ie`. Only change the records listed here.
 
@@ -124,7 +124,7 @@ This is done at whoever manages the domain's DNS. That's usually the .ie registr
 3. In the repo, go to **Settings → Pages → Custom domain**, enter `noelconnolly.ie` and **Save**. GitHub adds a `CNAME` file to the repo.
 4. Wait. DNS changes take from a few minutes to a few hours. When the Pages settings show the DNS check as successful, tick **Enforce HTTPS**. The certificate can take up to an hour to appear.
 5. Check <https://noelconnolly.ie> and <https://www.noelconnolly.ie>; both should show the new site.
-6. If Yola was hosting the old site, cancel that plan only after the new site is live. Make sure cancelling doesn't also cancel the domain or the email.
+6. **Don't cancel the Web Hosting Ireland plan.** The `mail@noelconnolly.ie` mailbox and the domain itself are with them. Once the new site is live you can ask them to downgrade to email-only hosting if that's cheaper.
 
 ---
 
