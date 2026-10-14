@@ -15,6 +15,5 @@ The contact form posts to the address in `assets/js/config.js`. That is the Cons
 The site sets no cookies and makes no third-party requests (fonts are self-hosted), so it needs no cookie banner. Retention periods are in `privacy.html` and must match the CRM's.
 
 - **Going live** (form, GitHub Pages, photos, domain): [SETUP.md](SETUP.md)
-- **Connecting the Constituency CRM:** [CRM-HANDOFF-PROMPT.md](CRM-HANDOFF-PROMPT.md) and the follow-up [CRM-FOLLOWUP-PROMPT.md](CRM-FOLLOWUP-PROMPT.md) (both already carried out)
 
 To try it locally, run `python3 -m http.server` in this folder and open <http://localhost:8000>.
