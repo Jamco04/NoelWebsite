@@ -42,7 +42,7 @@ This runs on a Google account. A personal Gmail can send about 100 emails a day,
 
 **Before launch:** have a fluent Irish speaker check the Irish text in `confirmationEmail()` in `Code.gs`. It was written carefully but has not been checked.
 
-**Turning the confirmation off.** If the CRM is set to send its own acknowledgement, add a Script Property `SEND_AUTO_REPLY` with the value `false`, so people don't get two. `CRM-HANDOFF-PROMPT.md` covers this from the CRM side.
+**Turning the confirmation off.** If the CRM is set to send its own acknowledgement, add a Script Property `SEND_AUTO_REPLY` with the value `false`, so people don't get two. The CRM has a matching setting, "Website form sends its own confirmation".
 
 **Spam and limits.** The script ignores submissions that fill in a hidden field or arrive faster than a person could type. It allows 5 messages an hour per email address or phone number. If the daily email limit is reached, the submission is still saved in the Sheet, marked "No (daily email limit reached)".
 
